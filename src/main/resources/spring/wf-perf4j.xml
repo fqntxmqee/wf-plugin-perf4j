@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean class="org.webframe.core.util.PropertyConfigurerUtils">
+		<property name="order" value="10" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="location" value="classpath:perf4j.properties"/>
+	</bean>
+
+	<bean class="org.webframe.plugins.perf4j.core.Perf4jAutoProxyCreator">
+		<property name="beanNamePattern" value="${perf4j.bean.names}"/>
+		<property name="interceptorName" value="perf4jInterceptor"/>
+	</bean>
+	
+	<bean id="perf4jInterceptor" class="org.webframe.plugins.perf4j.core.Perf4jInterceptor">
+		<property name="stopWatchClass" value="${perf4j.stopwatch}"/>
+		<property name="methodPattern" value="${perf4j.bean.methods}"/>
+		<property name="pathMatcher" value="${perf4j.bean.method.matcher}"/>
+	</bean>
+</beans>
+  	
+  	
